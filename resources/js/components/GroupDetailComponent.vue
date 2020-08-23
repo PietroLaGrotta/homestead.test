@@ -54,6 +54,7 @@
 
                                 <div class="col-md-12">
                                     <button type="button" @click="update" class="btn btn-primary">Submit</button>
+                                    <button type="button" onclick="window.location.href='/groups'" class="btn btn-primary">Torna alla lista dei gruppi</button>
                                 </div>
                             </div>
 
@@ -111,9 +112,10 @@
                     .then(response => {
                         console.log(response);
                          if (response.data.success) {
-                             alert('Il salvataggio del gruppo è andato a buon fine :-)');
+                            alert('Il salvataggio del gruppo è andato a buon fine :-)');
+                            window.location.href='/groups/' + response.data.groupid + '/template';
                          } else {
-                             alert('Errori durante il salvataggio del gruppo :-(');
+                            alert('Errori durante il salvataggio del gruppo :-(');
                          }
                     })
                     .catch(error => {

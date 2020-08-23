@@ -24,7 +24,7 @@
                  <th>Title</th>
                  <th>Description</th>
                  <th>Created at</th>
-                 <td colspan="2">Action</td>
+                 <td colspan="3"><strong>Action</strong></td>
               </tr>
            </thead>
            <tbody>
@@ -37,7 +37,9 @@
                        <td>{{ $group->title }}</td>
                        <td>{{ $group->description }}</td>
                        <td>{{ date('d/m/Y', strtotime($group->created_at)) }}</td>
-                       <td><a href="{{ url('/groups/' . $group->id . '/template') }}" class="btn btn-primary">Edit</a></td> 
+                       
+                       <td><a href="{{ url('/groups/' . $group->id . '/template') }}" class="btn btn-primary">Edit</a></td>
+                       <td><a href="{{ url('/members/' . $group->id . '/index' ) }}" class="btn btn-primary">Members</a></td> 
                        <td>
                        <form action="{{ route('groups.destroy', $group->id)}}" method="post">
                         {{ csrf_field() }}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Groups;
+use App\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Route;
@@ -17,8 +18,7 @@ class GroupsController extends Controller
     public function index()
     {
         $groups = Groups::all()
-                //->where('howner_id', Auth::user()->id)
-                //->where('visible', true)
+                ->whereIn('id', $this->getUserGroupsIds())
                 ->where('deleted', false);
         
         return view('groups.index', [
@@ -26,7 +26,35 @@ class GroupsController extends Controller
             'groups' => $groups
         ]);
     }
-
+    
+    /**
+     * Seleziona le chiavi primarie dei gruppi a cui appartiene l'utente 
+     * e le chiavi primarie dei gruppi di cui l'utente è proprietario
+     */
+    private function getUserGroupsIds() {
+        
+        $ids = [];
+        
+        $registredGroupsIds = Member::all()
+                   ->where('user_id', Auth::user()->id)
+                   ->pluck('group_id');
+        
+        foreach ($registredGroupsIds as $id) {
+            $ids[] = $id;
+        }
+        
+        $propertyGroupIds = Groups::all()    
+                          ->where('howner_id', Auth::user()->id)
+                          ->where('deleted', false)
+                          ->pluck('id');
+        
+        foreach ($propertyGroupIds as $id) {
+            $ids[] = $id;
+        }
+        
+        return $ids;
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -117,7 +145,8 @@ class GroupsController extends Controller
      */
     public function update(Request $request)
     {
-        if ( $request->id == 0 ) {
+        $isNew = ( $request->id == 0 );
+        if ( $isNew ) {
             
             $group = new Groups;
             $group->howner_id = $request->howner_id;
@@ -133,10 +162,29 @@ class GroupsController extends Controller
         $group->subscription_id = $request->subscription_id;
         
         $group->save();
+        
+        if ( $isNew ) {
+            $this->addHownerAsFirstMember($group->howner_id, $group->id);
+        }
 
         return response()->json([
-            'success' => true
+            'success' => true,
+            'groupid' => $group->id
         ]);
+    }
+    
+    function addHownerAsFirstMember($userId, $groupId) {
+        
+        $member = new Member;
+        
+        $member->user_id = $userId;
+        $member->group_id = $groupId;
+        
+        $member->product_abled = 
+        $member->home_abled = 
+        $member->car_abled = true;
+        
+        $member->save();
     }
 
     /**

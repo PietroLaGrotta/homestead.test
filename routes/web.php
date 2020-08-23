@@ -23,10 +23,10 @@ Auth::routes();
 Route::get('/home', 'GroupsController@index');
 
 Route::resource('groups', 'GroupsController')->middleware('auth');
+Route::resource('members', 'MembersController')->middleware('auth');
 Route::resource('products', 'ProductsController');
 Route::resource('homes', 'HomesController');
 Route::resource('cars', 'CarsController');
-Route::resource('members', 'MembersController');
 Route::resource('subscriptions', 'SubscriptionsController');
 Route::resource('payments', 'PaymentsController');
 
@@ -38,5 +38,7 @@ Route::get('/groups/{id}/template', function ( $groupId ) {
 })->middleware('auth');
 
 Route::patch('/groups', 'GroupsController@update')->middleware('auth');
+Route::get('/members/{groupId}/index', 'MembersController@index')->middleware('auth');
+Route::patch('/members', 'MembersController@update')->middleware('auth');
 
 

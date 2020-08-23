@@ -14,4 +14,15 @@ class Member extends Model
     protected $fillable = [
         'user_id', 'group_id', 'product_abled', 'home_abled', 'car_abled'
     ];
+    
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'product_abled' => false, 
+        'home_abled' => false,
+        'car_abled' => false
+    ];
 }
