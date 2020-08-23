@@ -1,0 +1,14 @@
+{
+    "elements": {},
+    "attributes": {
+        "@click": {
+            "context": "button"
+        },
+        "v-for": {
+            "context": "option"
+        },
+        "v-model": {
+            "context": "input"
+        }
+    }
+}
