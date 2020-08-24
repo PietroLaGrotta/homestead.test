@@ -141,8 +141,14 @@ class ProductsController extends Controller
      * @param  \App\ProductInventory  $productInventory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductInventory $productInventory)
+    public function destroy($id)
     {
-        //
+        $product = Groups::find($id);
+        $product->deleted = true;
+        $product->save();
+        
+        return redirect()->action(
+            'ProductsController@index'
+        );
     }
 }

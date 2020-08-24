@@ -45,7 +45,7 @@
                        <td><a href="{{ url('/products/' . $good->id . '/template') }}" class="btn btn-primary">Edit</a></td>
                        
                        <td>
-                       <form action="{{ route('groups.destroy', $good->id)}}" method="post">
+                       <form action="{{ route('products.destroy', $good->id)}}" method="post">
                         {{ csrf_field() }}
                         @method('DELETE')
                         <button class="btn btn-danger" type="submit">Delete</button>
