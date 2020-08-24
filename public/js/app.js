@@ -2208,7 +2208,7 @@ __webpack_require__.r(__webpack_exports__);
         group_id: 0,
         title: '',
         description: '',
-        img_file_name: '',
+        img_file_name: 'default.jpg',
         barcode: '',
         price: 0,
         visible: 0

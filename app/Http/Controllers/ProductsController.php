@@ -67,23 +67,24 @@ class ProductsController extends Controller
             
             return response()->json([
                
-                'group' => [
+                'product' => [
                     'id' => 0,
-                    'howner_id' => Auth::user()->id,
+                    'group_id' => 0,
                     'title' => '',
                     'description' => '',
                     'img_file_name' => 'default.jpg',
-                    'visible' => 'Nascosto',
-                    'subscription_id' => 0
+                    'barcode' => '',
+                    'price' => 0,
+                    'visible' => 0,
                 ],
                
-                'subscriptions' => $groups
+                'groups' => $groups
             ]); 
         }
         
         return response()->json([
-            'product' => ProductInventoryView::find($id),
-            'groups' => $groups
+            'product' => ProductInventoryView::find( $id ),
+            'groups'  => $groups
         ]);   
     }
     
@@ -113,10 +114,7 @@ class ProductsController extends Controller
     {
         $isNew = ( $request->id == 0 );
         if ( $isNew ) {
-            
             $good = new ProductInventory;
-            $good->img_file_name = $request->img_file_name;
-        
         } else {
             $good = ProductInventory::find($request->id);
         }  
@@ -126,6 +124,8 @@ class ProductsController extends Controller
         $good->visible = $request->visible;
         $good->group_id = $request->group_id;
         $good->price = $request->price;
+        $good->img_file_name = $request->img_file_name;
+        $good->barcode = $request->barcode;
         
         $good->save();
         

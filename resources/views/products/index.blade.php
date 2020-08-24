@@ -9,13 +9,13 @@
 
                 <div class="card-body">
                     
-<!--                    <div class="row">
+                    <div class="row">
                         <div class="col-md-12">
-                            <button onclick="window.location.href='/groups/0/template'" class="btn btn-primary">Nuovo Gruppo</button>
+                            <button onclick="window.location.href='/products/0/template'" class="btn btn-primary">Nuovo Prodotto</button>
                         </div>
-                    </div>-->
+                    </div>
                     <br>
-                    <table class="table table-bordered" id="laravel_crud">
+                    <table class="table table-bordered" id="laravel_crud"> 
            <thead>
               <tr>
                  <th>Id</th>
