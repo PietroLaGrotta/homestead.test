@@ -24,6 +24,7 @@
                  <th>Gruppo</th>
                  <th>Description</th>
                  <th>Barcode</th>
+                 <th>Prezzo</th>
                  <th>Created at</th>
                  <td colspan="2"><strong>Action</strong></td>
               </tr>
@@ -38,9 +39,10 @@
                        <td>{{ $good->group_title }}</td>
                        <td>{{ $good->description }}</td>
                        <td>{{ $good->barcode }}</td>
+                       <td>{{ $good->price }}</td>
                        <td>{{ date('d/m/Y', strtotime($good->created_at)) }}</td>
                        
-                       <td><a href="{{ url('/groups/' . $good->id . '/template') }}" class="btn btn-primary">Edit</a></td>
+                       <td><a href="{{ url('/products/' . $good->id . '/template') }}" class="btn btn-primary">Edit</a></td>
                        
                        <td>
                        <form action="{{ route('groups.destroy', $good->id)}}" method="post">

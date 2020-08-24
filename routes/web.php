@@ -24,7 +24,7 @@ Route::get('/home', 'GroupsController@index');
 
 Route::resource('groups', 'GroupsController')->middleware('auth');
 Route::resource('members', 'MembersController')->middleware('auth');
-Route::resource('products', 'ProductsController');
+Route::resource('products', 'ProductsController')->middleware('auth');
 Route::resource('homes', 'HomesController');
 Route::resource('cars', 'CarsController');
 Route::resource('subscriptions', 'SubscriptionsController');
@@ -41,4 +41,11 @@ Route::patch('/groups', 'GroupsController@update')->middleware('auth');
 Route::get('/members/{groupId}/index', 'MembersController@index')->middleware('auth');
 Route::patch('/members', 'MembersController@update')->middleware('auth');
 
+Route::get('/products/{id}/template', function ( $productId ) {
+    return view('products.show', [
+        'userid' => Auth::user()->id,
+        'productid' => $productId 
+    ]);
+})->middleware('auth');
 
+Route::patch('/products', 'ProductsController@update')->middleware('auth');

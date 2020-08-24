@@ -59,9 +59,36 @@ class ProductsController extends Controller
      * @param  \App\ProductInventory  $productInventory
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductInventory $productInventory)
-    {
-        //
+    public function show($id) {
+        
+        $groups = $this->getUserGroupsForSelect();
+        
+        if ($id == 0) {
+            
+            return response()->json([
+               
+                'group' => [
+                    'id' => 0,
+                    'howner_id' => Auth::user()->id,
+                    'title' => '',
+                    'description' => '',
+                    'img_file_name' => 'default.jpg',
+                    'visible' => 'Nascosto',
+                    'subscription_id' => 0
+                ],
+               
+                'subscriptions' => $groups
+            ]); 
+        }
+        
+        return response()->json([
+            'product' => ProductInventoryView::find($id),
+            'groups' => $groups
+        ]);   
+    }
+    
+    private function getUserGroupsForSelect() {
+        return Groups::getUserGroupsForOptionsSelect();
     }
 
     /**
@@ -82,9 +109,30 @@ class ProductsController extends Controller
      * @param  \App\ProductInventory  $productInventory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductInventory $productInventory)
+    public function update(Request $request)
     {
-        //
+        $isNew = ( $request->id == 0 );
+        if ( $isNew ) {
+            
+            $good = new ProductInventory;
+            $good->img_file_name = $request->img_file_name;
+        
+        } else {
+            $good = ProductInventory::find($request->id);
+        }  
+        
+        $good->title = $request->title;
+        $good->description = $request->description;
+        $good->visible = $request->visible;
+        $good->group_id = $request->group_id;
+        $good->price = $request->price;
+        
+        $good->save();
+        
+        return response()->json([
+            'success' => true,
+            'productid' => $good->id
+        ]);
     }
 
     /**
