@@ -32,27 +32,7 @@ class GroupsController extends Controller
      * e le chiavi primarie dei gruppi di cui l'utente è proprietario
      */
     private function getUserGroupsIds() {
-        
-        $ids = [];
-        
-        $registredGroupsIds = Member::all()
-                   ->where('user_id', Auth::user()->id)
-                   ->pluck('group_id');
-        
-        foreach ($registredGroupsIds as $id) {
-            $ids[] = $id;
-        }
-        
-        $propertyGroupIds = Groups::all()    
-                          ->where('howner_id', Auth::user()->id)
-                          ->where('deleted', false)
-                          ->pluck('id');
-        
-        foreach ($propertyGroupIds as $id) {
-            $ids[] = $id;
-        }
-        
-        return $ids;
+        return Groups::getUserGroupsIds();
     }
     
     /**

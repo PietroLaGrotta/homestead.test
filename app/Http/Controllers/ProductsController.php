@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\ProductInventory;
 use Illuminate\Http\Request;
+use App\ProductInventoryView;
+use App\Groups;
 
 class ProductsController extends Controller
 {
@@ -12,9 +14,22 @@ class ProductsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        
+        $goods = ProductInventoryView::all()
+                     ->whereIn('id', $this->getUserGroupsIds());
+        
+        return view('products.index', [
+            'goods' => $goods
+        ]);
+    }
+    
+    /**
+     * Seleziona le chiavi primarie dei gruppi a cui appartiene l'utente 
+     * e le chiavi primarie dei gruppi di cui l'utente è proprietario
+     */
+    private function getUserGroupsIds() {
+        return Groups::getUserGroupsIds();
     }
 
     /**

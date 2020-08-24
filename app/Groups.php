@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Member;
+use Illuminate\Support\Facades\Auth;
 
 class Groups extends Model
 {
@@ -26,7 +28,28 @@ class Groups extends Model
         'deleted' => false
     ];
     
-//    function isHowner($currentUserId): string {
-//        return ($this->id == $currentUserId) ? 'Si' : 'No';
-//    }
+
+    static function getUserGroupsIds() {
+        
+        $ids = [];
+        
+        $registredGroupsIds = Member::all()
+                   ->where('user_id', Auth::user()->id)
+                   ->pluck('group_id');
+        
+        foreach ($registredGroupsIds as $id) {
+            $ids[] = $id;
+        }
+        
+        $propertyGroupIds = Groups::all()    
+                          ->where('howner_id', Auth::user()->id)
+                          ->where('deleted', false)
+                          ->pluck('id');
+        
+        foreach ($propertyGroupIds as $id) {
+            $ids[] = $id;
+        }
+        
+        return $ids;
+    }
 }
