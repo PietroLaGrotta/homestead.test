@@ -17,7 +17,7 @@ class ProductsController extends Controller
     public function index() {
         
         $goods = ProductInventoryView::all()
-                     ->whereIn('id', $this->getUserGroupsIds());
+               ->whereIn('id', $this->getUserGroupsIds());
         
         return view('products.index', [
             'goods' => $goods
@@ -98,9 +98,8 @@ class ProductsController extends Controller
      * @param  \App\ProductInventory  $productInventory
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductInventory $productInventory)
-    {
-        //
+    public function edit(ProductInventory $productInventory) {
+        
     }
 
     /**
@@ -143,7 +142,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $product = Groups::find($id);
+        $product = ProductInventory::find($id);
         $product->deleted = true;
         $product->save();
         
