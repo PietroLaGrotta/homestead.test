@@ -14,28 +14,30 @@ class Groups extends Model
      *
      * @var array
      */
-    protected $fillable = [
-        'howner_id', 'subscription_id', 'title', 'description', 'img_file_name'
-    ];
-    
-    /**
-     * The model's default values for attributes.
-     *
-     * @var array
-     */
-    protected $attributes = [
-        'img_file_name' => 'default.jpg',
-        'visible' => 'Visibile',
-        'deleted' => false
-    ];
+//    protected $fillable = [
+//        'howner_id', 'subscription_id', 'title', 'description', 'img_file_name', 'status'
+//    ];
+//    
+//    /**
+//     * The model's default values for attributes.
+//     *
+//     * @var array
+//     */
+//    protected $attributes = [
+//        'img_file_name' => 'default.jpg',
+//        'status' => 1,
+//        'deleted' => false
+//    ];
     
 
     static function getUserGroupsIds() {
         
         $ids = [];
+        $userId = Auth::user()->id;
         
         $registredGroupsIds = Member::all()
-                   ->where('user_id', Auth::user()->id)
+                
+                ->where('user_id', $userId)
                    ->pluck('group_id');
         
         foreach ($registredGroupsIds as $id) {
@@ -43,7 +45,7 @@ class Groups extends Model
         }
         
         $propertyGroupIds = Groups::all()    
-                          ->where('howner_id', Auth::user()->id)
+                          ->where('howner_id', $userId)
                           ->where('deleted', false)
                           ->pluck('id');
         
@@ -60,28 +62,21 @@ class Groups extends Model
      */
     static function getUserGroupsForOptionsSelect() {
         
-        $ids = [];
-        $userId = Auth::user()->id;
         $options = [];
         
-        $registredGroupsIds = Member::all()
-                   ->where('user_id', $userId)
-                   ->pluck('group_id');
-        
-        foreach ($registredGroupsIds as $id) {
-            $ids[] = $id;
-        }
-        
-        
-        $groups = DB::table('groups')->whereIn('id', $ids)
-                                     ->orWhere('howner_id', $userId)
-                                     ->get();
+        $groups = Groups::all()
+                ->whereIn('id', self::getUserGroupsIds())
+                ->where('deleted', false);
         
         foreach ($groups as $group) {
-            $options[] = [
-                'text' => $group->title,
-                'value' => $group->id
-            ];
+            if ($group->status == 1) {
+            
+                $options[] = [
+                    'visible' => $group->active, 
+                    'text' => $group->title,
+                    'value' => $group->id
+                ];
+            }
         }
         
         return $options;

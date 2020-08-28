@@ -12,7 +12,7 @@ class HomeInventory extends Model
      * @var array
      */
     protected $fillable = [
-        'group_id', 'property_code', 'title', 'description', 'img_file_name', 'price','address', 'country', 'zip_code', 'position', 'visible'
+        'group_id', 'property_code', 'title', 'description', 'img_file_name', 'price','address', 'country', 'zip_code', 'position', 'status'
     ];
     
     /**
@@ -22,7 +22,7 @@ class HomeInventory extends Model
      */
     protected $attributes = [
         'img_file_name' => 'default.jpg',
-        'visible' => true,
+        'status' => true,
         'deleted' => false
     ];
 }

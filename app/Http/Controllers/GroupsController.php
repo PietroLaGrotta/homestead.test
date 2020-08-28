@@ -73,7 +73,7 @@ class GroupsController extends Controller
                     'title' => '',
                     'description' => '',
                     'img_file_name' => 'default.jpg',
-                    'visible' => 'Nascosto',
+                    'status' => 0,
                     'subscription_id' => 0
                 ],
                
@@ -91,7 +91,7 @@ class GroupsController extends Controller
         
         $rawSubscriptions = \App\Subscription::all()
                        ->where('deleted', false)
-                       ->where('visible', true);
+                       ->where('status', true);
         
         $subscriptions = []; 
         
@@ -138,7 +138,7 @@ class GroupsController extends Controller
         
         $group->title = $request->title;
         $group->description = $request->description;
-        $group->visible = $request->visible;
+        $group->status = $request->status;
         $group->subscription_id = $request->subscription_id;
         
         $group->save();

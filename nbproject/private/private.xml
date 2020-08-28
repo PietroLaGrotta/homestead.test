@@ -5,11 +5,11 @@
         <group>
             <file>file:/C:/Users/pedro/code/project1/app/Http/Controllers/ProductsController.php</file>
             <file>file:/C:/Users/pedro/code/project1/routes/web.php</file>
-            <file>file:/C:/Users/pedro/code/project1/resources/js/app.js</file>
-            <file>file:/C:/Users/pedro/code/project1/resources/views/products/show.blade.php</file>
-            <file>file:/C:/Users/pedro/code/project1/resources/views/products/index.blade.php</file>
             <file>file:/C:/Users/pedro/code/project1/app/Http/Controllers/GroupsController.php</file>
-            <file>file:/C:/Users/pedro/code/project1/resources/js/components/ProductDetailComponent.vue</file>
+            <file>file:/C:/Users/pedro/code/project1/app/Http/Controllers/HomesController.php</file>
+            <file>file:/C:/Users/pedro/code/project1/app/Groups.php</file>
+            <file>file:/C:/Users/pedro/code/project1/resources/views/homes/index.blade.php</file>
+            <file>file:/C:/Users/pedro/code/project1/resources/js/components/HomeDetailComponent.vue</file>
         </group>
     </open-files>
 </project-private>

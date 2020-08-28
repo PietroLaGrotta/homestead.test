@@ -17,7 +17,7 @@ class HomesController extends Controller
     public function index() {
         
         $goods = HomeInventoryView::all()
-               ->whereIn('id', $this->getUserGroupsIds());
+               ->whereIn('group_id', $this->getUserGroupsIds());
         
         return view('homes.index', [
             'goods' => $goods
@@ -67,7 +67,7 @@ class HomesController extends Controller
             
             return response()->json([
                
-                'homes' => [
+                'home' => [
                     'id' => 0,
                     'group_id' => 0,
                     'property_code' => '',
@@ -79,6 +79,8 @@ class HomesController extends Controller
                     'country' => '',
                     'zip_code' => 0,
                     'visible' => 0,
+                    'latitude' => 0,
+                    'longitude' => 0
                 ],
                
                 'groups' => $groups
@@ -86,7 +88,7 @@ class HomesController extends Controller
         }
         
         return response()->json([
-            'homes' => HomeInventoryView::find( $id ),
+            'home' => HomeInventoryView::find( $id ),
             'groups'  => $groups
         ]);   
     }
@@ -130,7 +132,9 @@ class HomesController extends Controller
         $good->address = $request->address;
         $good->country = $request->country;
         $good->zip_code = $request->zip_code;
-        $good->visible = $request->visible;
+        $good->status = $request->status;
+        $good->latitude = $request->latitude;
+        $good->longitude = $request->longitude;
         
         $good->save();
         

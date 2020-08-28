@@ -30,9 +30,9 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <strong>Stato</strong>
-                                        <select v-model="group.visible" class="form-control">
-                                            <option>Visibile</option>
-                                            <option>Nascosto</option>
+                                        <select v-model="group.status" class="form-control">
+                                            <option value="1">Visibile</option>
+                                            <option value="0">Nascosto</option>
                                         </select>
 
                                         <!--<span class="text-danger">{{ $errors->first('description') }}</span>-->
@@ -77,7 +77,7 @@
                     title: '',
                     description: '',
                     img_file_name: '',
-                    visible: '',
+                    status: 0,
                     subscription_id: 0,
                 },
                 

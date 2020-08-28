@@ -2065,7 +2065,7 @@ __webpack_require__.r(__webpack_exports__);
         title: '',
         description: '',
         img_file_name: '',
-        visible: '',
+        status: 0,
         subscription_id: 0
       },
       subscriptions: [{
@@ -2200,6 +2200,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2214,7 +2254,9 @@ __webpack_require__.r(__webpack_exports__);
         address: '',
         country: '',
         zip_code: '',
-        visible: 0
+        status: 0,
+        latitude: 0,
+        longitude: 0
       },
       groups: [{
         text: 'Selezionare un gruppo',
@@ -2234,7 +2276,8 @@ __webpack_require__.r(__webpack_exports__);
       console.log(api);
       axios.get(api).then(function (response) {
         _this.home = response.data.home;
-        _this.groups = response.data.groups; //console.log(response.data.subscriptions);
+        _this.groups = response.data.groups;
+        console.log(response);
       });
     },
     update: function update() {
@@ -2360,7 +2403,7 @@ __webpack_require__.r(__webpack_exports__);
         img_file_name: 'default.jpg',
         barcode: '',
         price: 0,
-        visible: 0
+        status: 0
       },
       groups: [{
         text: 'Selezionare un gruppo',
@@ -38171,8 +38214,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.group.visible,
-                            expression: "group.visible"
+                            value: _vm.group.status,
+                            expression: "group.status"
                           }
                         ],
                         staticClass: "form-control",
@@ -38188,7 +38231,7 @@ var render = function() {
                               })
                             _vm.$set(
                               _vm.group,
-                              "visible",
+                              "status",
                               $event.target.multiple
                                 ? $$selectedVal
                                 : $$selectedVal[0]
@@ -38197,9 +38240,13 @@ var render = function() {
                         }
                       },
                       [
-                        _c("option", [_vm._v("Visibile")]),
+                        _c("option", { attrs: { value: "1" } }, [
+                          _vm._v("Visibile")
+                        ]),
                         _vm._v(" "),
-                        _c("option", [_vm._v("Nascosto")])
+                        _c("option", { attrs: { value: "0" } }, [
+                          _vm._v("Nascosto")
+                        ])
                       ]
                     )
                   ])
@@ -38317,7 +38364,9 @@ var render = function() {
       _c("div", { staticClass: "col-md-8" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
-            _c("h1", [_vm._v("Dettagli gruppo " + _vm._s(_vm.home.title))])
+            _c("h1", [
+              _vm._v("Dettagli dell'immobile " + _vm._s(_vm.home.title))
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
@@ -38503,6 +38552,158 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-12" }, [
                   _c("div", { staticClass: "form-group" }, [
+                    _c("strong", [_vm._v("Indirizzo")]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.home.address,
+                          expression: "home.address"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { placeholder: "Indirizzo immobile" },
+                      domProps: { value: _vm.home.address },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.home, "address", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("strong", [_vm._v("Nazione")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.home.country,
+                          expression: "home.country"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "text", placeholder: "Enter country" },
+                      domProps: { value: _vm.home.country },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.home, "country", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("strong", [_vm._v("Codice postale")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.home.zip_code,
+                          expression: "home.zip_code"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Enter zip code",
+                        maxlength: "5"
+                      },
+                      domProps: { value: _vm.home.zip_code },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.home, "zip_code", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("strong", [_vm._v("Latitudine")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.home.latitude,
+                          expression: "home.latitude"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Enter latitude. Es.: 41.33656284478",
+                        pattern: "^(-?\\d+(\\.\\d+)?)$"
+                      },
+                      domProps: { value: _vm.home.latitude },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.home, "latitude", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("strong", [_vm._v("Longitudine")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.home.longitude,
+                          expression: "home.longitude"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Enter longitude. Es.: 41.33656284478",
+                        pattern: "^(-?\\d+(\\.\\d+)?)$"
+                      },
+                      domProps: { value: _vm.home.longitude },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.home, "longitude", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
                     _c("strong", [_vm._v("Stato")]),
                     _vm._v(" "),
                     _c(
@@ -38512,8 +38713,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.home.visible,
-                            expression: "home.visible"
+                            value: _vm.home.status,
+                            expression: "home.status"
                           }
                         ],
                         staticClass: "form-control",
@@ -38529,7 +38730,7 @@ var render = function() {
                               })
                             _vm.$set(
                               _vm.home,
-                              "visible",
+                              "status",
                               $event.target.multiple
                                 ? $$selectedVal
                                 : $$selectedVal[0]
@@ -38570,7 +38771,7 @@ var render = function() {
                         onclick: "window.location.href='/homes'"
                       }
                     },
-                    [_vm._v("Torna alla lista dei prodotti")]
+                    [_vm._v("Torna alla lista delle case")]
                   )
                 ])
               ])
@@ -38608,7 +38809,7 @@ var render = function() {
       _c("div", { staticClass: "col-md-8" }, [
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }, [
-            _c("h1", [_vm._v("Dettagli gruppo " + _vm._s(_vm.product.title))])
+            _c("h1", [_vm._v("Dettagli prodotto " + _vm._s(_vm.product.title))])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
@@ -38800,8 +39001,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.product.visible,
-                            expression: "product.visible"
+                            value: _vm.product.status,
+                            expression: "product.status"
                           }
                         ],
                         staticClass: "form-control",
@@ -38817,7 +39018,7 @@ var render = function() {
                               })
                             _vm.$set(
                               _vm.product,
-                              "visible",
+                              "status",
                               $event.target.multiple
                                 ? $$selectedVal
                                 : $$selectedVal[0]

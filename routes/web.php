@@ -25,7 +25,7 @@ Route::get('/home', 'GroupsController@index');
 Route::resource('groups', 'GroupsController')->middleware('auth');
 Route::resource('members', 'MembersController')->middleware('auth');
 Route::resource('products', 'ProductsController')->middleware('auth');
-Route::resource('homes', 'HomesController')->middleware('auth');
+Route::resource('homes', 'HomesController'); // ->middleware('auth');
 Route::resource('cars', 'CarsController');
 Route::resource('subscriptions', 'SubscriptionsController');
 Route::resource('payments', 'PaymentsController');

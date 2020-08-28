@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"><h1>Dettagli gruppo {{product.title}}</h1></div>
+                    <div class="card-header"><h1>Dettagli prodotto {{product.title}}</h1></div>
 
                     <div class="card-body">
                         <form name="update_group">
@@ -57,7 +57,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <strong>Stato</strong>
-                                        <select v-model="product.visible" class="form-control">
+                                        <select v-model="product.status" class="form-control">
                                             <option value="1">Visibile</option>
                                             <option value="0">Nascosto</option>
                                         </select>
@@ -93,7 +93,7 @@
                     img_file_name: 'default.jpg',
                     barcode: '',
                     price: 0,
-                    visible: 0,
+                    status: 0,
                 },
                 
                 groups: [{

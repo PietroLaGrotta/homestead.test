@@ -12,7 +12,7 @@ class ProductInventory extends Model
      * @var array
      */
     protected $fillable = [
-        'group_id', 'barcode', 'title', 'description', 'img_file_name', 'price', 'visible'
+        'group_id', 'barcode', 'title', 'description', 'img_file_name', 'price', 'status'
     ];
     
     /**
@@ -22,7 +22,7 @@ class ProductInventory extends Model
      */
     protected $attributes = [
         'img_file_name' => 'default.jpg',
-        'visible' => true,
+        'status' => true,
         'deleted' => false
     ];
 }

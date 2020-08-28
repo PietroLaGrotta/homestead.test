@@ -12,7 +12,7 @@ class CarInventory extends Model
      * @var array
      */
     protected $fillable = [
-        'group_id', 'registration_number', 'title', 'description', 'img_file_name', 'price','registration_year', 'kilometers', 'visible'
+        'group_id', 'registration_number', 'title', 'description', 'img_file_name', 'price','registration_year', 'kilometers', 'status'
     ];
     
     /**
@@ -22,7 +22,7 @@ class CarInventory extends Model
      */
     protected $attributes = [
         'img_file_name' => 'default.jpg',
-        'visible' => true,
+        'status' => true,
         'deleted' => false
     ];
 }

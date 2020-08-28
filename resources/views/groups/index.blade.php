@@ -29,11 +29,11 @@
            </thead>
            <tbody>
               @foreach($groups as $group)
-                @if (($group->howner_id == $user->id) || $group->visible)
+                @if (($group->howner_id == $user->id) || $group->status)
                     <tr>
                        <td>{{ $group->id }}</td>
                        <td>{{ ($group->howner_id == $user->id) ? "Si" : "No" }}</td>
-                       <td>{{ $group->visible }}</td>
+                       <td>{{ ($group->status) ? "Visibile" : "Nascosto" }}</td>
                        <td>{{ $group->title }}</td>
                        <td>{{ $group->description }}</td>
                        <td>{{ date('d/m/Y', strtotime($group->created_at)) }}</td>

@@ -21,7 +21,7 @@ class Subscription extends Model
      * @var array
      */
     protected $attributes = [
-        'visible' => true,
+        'status' => true,
         'deleted' => false
     ];
 }

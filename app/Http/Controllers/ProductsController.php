@@ -17,7 +17,7 @@ class ProductsController extends Controller
     public function index() {
         
         $goods = ProductInventoryView::all()
-               ->whereIn('id', $this->getUserGroupsIds());
+               ->whereIn('group_id', $this->getUserGroupsIds());
         
         return view('products.index', [
             'goods' => $goods
@@ -75,7 +75,7 @@ class ProductsController extends Controller
                     'img_file_name' => 'default.jpg',
                     'barcode' => '',
                     'price' => 0,
-                    'visible' => 0,
+                    'status' => 0,
                 ],
                
                 'groups' => $groups
@@ -120,7 +120,7 @@ class ProductsController extends Controller
         
         $good->title = $request->title;
         $good->description = $request->description;
-        $good->visible = $request->visible;
+        $good->status = $request->status;
         $good->group_id = $request->group_id;
         $good->price = $request->price;
         $good->img_file_name = $request->img_file_name;

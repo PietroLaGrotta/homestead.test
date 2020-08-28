@@ -34,7 +34,7 @@
                 
                     <tr>
                        <td>{{ $good->id }}</td>
-                       <td>{{ ($good->visible) ? "Visibile" : "Nascosto" }}</td>
+                       <td>{{ ($good->status) ? "Visibile" : "Nascosto" }}</td>
                        <td>{{ $good->title }}</td>
                        <td>{{ $good->group_title }}</td>
                        <td>{{ $good->description }}</td>
