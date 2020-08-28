@@ -25,8 +25,8 @@ Route::get('/home', 'GroupsController@index');
 Route::resource('groups', 'GroupsController')->middleware('auth');
 Route::resource('members', 'MembersController')->middleware('auth');
 Route::resource('products', 'ProductsController')->middleware('auth');
-Route::resource('homes', 'HomesController'); // ->middleware('auth');
-Route::resource('cars', 'CarsController');
+Route::resource('homes', 'HomesController')->middleware('auth');
+Route::resource('cars', 'CarsController');//->middleware('auth');
 Route::resource('subscriptions', 'SubscriptionsController');
 Route::resource('payments', 'PaymentsController');
 
@@ -58,3 +58,12 @@ Route::get('/homes/{id}/template', function ( $homeId ) {
 })->middleware('auth');
 
 Route::patch('/homes', 'HomesController@update')->middleware('auth');
+
+Route::get('/cars/{id}/template', function ( $carId ) {
+    return view('cars.show', [
+        'userid' => Auth::user()->id,
+        'carid' => $carId 
+    ]);
+})->middleware('auth');
+
+Route::patch('/cars', 'CarsController@update')->middleware('auth');

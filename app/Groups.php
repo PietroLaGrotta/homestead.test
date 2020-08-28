@@ -33,7 +33,7 @@ class Groups extends Model
     static function getUserGroupsIds() {
         
         $ids = [];
-        $userId = Auth::user()->id;
+        $userId = 1;//Auth::user()->id;
         
         $registredGroupsIds = Member::all()
                 

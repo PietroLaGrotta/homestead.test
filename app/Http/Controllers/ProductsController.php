@@ -6,18 +6,19 @@ use App\ProductInventory;
 use Illuminate\Http\Request;
 use App\ProductInventoryView;
 use App\Groups;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
     public function index() {
         
         $goods = ProductInventoryView::all()
-               ->whereIn('group_id', $this->getUserGroupsIds());
+               ->whereIn('group_id', $this->getUserGroupsIds())
+               ->where('user_id', Auth::user()->id);
         
         return view('products.index', [
             'goods' => $goods

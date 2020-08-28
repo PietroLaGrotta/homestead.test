@@ -24,6 +24,7 @@ Vue.component('group-detail-component', require('./components/GroupDetailCompone
 Vue.component('app-abled-component', require('./components/AppAbledComponent.vue').default);
 Vue.component('product-detail-component', require('./components/ProductDetailComponent.vue').default);
 Vue.component('home-detail-component', require('./components/HomeDetailComponent.vue').default);
+Vue.component('car-detail-component', require('./components/CarDetailComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

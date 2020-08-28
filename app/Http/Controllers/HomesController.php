@@ -6,6 +6,7 @@ use App\HomeInventory;
 use App\HomeInventoryView;
 use Illuminate\Http\Request;
 use App\Groups;
+use Illuminate\Support\Facades\Auth;
 
 class HomesController extends Controller
 {
@@ -17,7 +18,8 @@ class HomesController extends Controller
     public function index() {
         
         $goods = HomeInventoryView::all()
-               ->whereIn('group_id', $this->getUserGroupsIds());
+               ->whereIn('group_id', $this->getUserGroupsIds())
+               ->where('user_id', Auth::user()->id);
         
         return view('homes.index', [
             'goods' => $goods
@@ -78,7 +80,7 @@ class HomesController extends Controller
                     'address' => '',
                     'country' => '',
                     'zip_code' => 0,
-                    'visible' => 0,
+                    'status' => 0,
                     'latitude' => 0,
                     'longitude' => 0
                 ],
